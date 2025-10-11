@@ -6,4 +6,4 @@ If you want to recalculate a checksum for a file. You will have to manually edit
 
 Verifier will inform you which files are OK, BAD, and MISSING. Verifier will not modify the checksums file no matter what.
 
-Files that contain "\" are skipped due to parsing issues.
+File that contain \ in the file name are skipped due to parsing issues.
