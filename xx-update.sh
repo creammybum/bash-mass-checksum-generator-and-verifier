@@ -44,6 +44,7 @@ while IFS= read -r path <&3; do
   else
     sha256sum -- "$path" >> "$TMP_OUT"
     ADDED=$((ADDED+1))
+    echo "NEW: $path"
   fi
 done
 exec 3<&-
@@ -58,6 +59,6 @@ MISSING_REMOVED="$(comm -23 "${TMP_EXIST}.paths" "${TMP_FILES}.paths" | wc -l | 
 rm -f "${TMP_EXIST}.paths" "${TMP_FILES}.paths"
 mv "$TMP_OUT" "$CHECKSUM_FILE"
 echo "========== FINISHED =========="
-echo "Added: $ADDED"
-echo "Reused (skipped recalculation): $REUSED"
-echo "Removed entries for missing files: $MISSING_REMOVED"
+echo "Added entries for NEW files: $ADDED"
+echo "Reused entries for EXISTING files: $REUSED"
+echo "Removed entries for MISSING files: $MISSING_REMOVED"

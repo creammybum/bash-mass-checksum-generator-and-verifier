@@ -35,14 +35,15 @@ while IFS= read -r line; do
   actual="$(sha256sum -- "$path" | awk '{print $1}')"
   if [ "$actual" != "$hash" ]; then
     MISMATCH_COUNT=$((MISMATCH_COUNT+1))
-    echo "BAD file: $path"
+    echo "BAD: $path"
     echo "  expected: $hash"
     echo "  actual:   $actual"
   else
     OK_COUNT=$((OK_COUNT+1))
+    echo "OK: $path"
   fi
 done < "$TMP_SORTED"
 echo "========== FINISHED =========="
 echo "OK files: $OK_COUNT"
 echo "BAD files: $MISMATCH_COUNT"
-echo "MISSING: $MISSING_COUNT"
+echo "MISSING files: $MISSING_COUNT"
